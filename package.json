@@ -6,11 +6,12 @@
   "license": "MIT",
   "scripts": {
     "serve": "live-server public/",
-    "build": "webpack",
+    "build:dev": "webpack",
+    "build:prod": "webpack -p",
     "dev-server": "webpack-dev-server --open http://localhost:8080",
     "test": "jest --config=jest.config.json --watchAll",
     "postinstall": "patch-package"
-  },
+  }, 
   "dependencies": {
     "css-loader": "^7.1.2",
     "enzyme": "^3.11.0",
