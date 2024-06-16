@@ -4,6 +4,8 @@ module.exports = (env) => {
   const isProduction = env === "production";
 
   return {
+    mode: isProduction ? 'production' : 'development', // Set the mode option
+
     entry: './src/app.js',
 
     output: {
@@ -32,11 +34,10 @@ module.exports = (env) => {
     },
 
     devtool: isProduction ? 'source-map' : 'eval-cheap-module-source-map',
-    // mode: 'development',
 
     devServer: {
       static: path.join(__dirname, 'public'),
       historyApiFallback: true,
     },
   }
-}
+};
