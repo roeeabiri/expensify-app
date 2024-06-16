@@ -1,5 +1,6 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { SourceMap } = require('module');
 
 module.exports = (env) => {
   const isProduction = env === 'production';
@@ -32,8 +33,15 @@ module.exports = (env) => {
           test: /\.s?css$/,
           use: [
             isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
-            'css-loader',
-            'sass-loader',
+            {
+              loader: 'css-loader', 
+              options: { sourceMap: true }
+            },
+
+            {
+              loader: 'sass-loader',
+              options: { sourceMap: true }
+            }
           ],
         },
       ],
@@ -41,8 +49,8 @@ module.exports = (env) => {
 
     plugins: [CSSExtract],
 
-    devtool: isProduction ? 'source-map' : 'eval-cheap-module-source-map',
-
+    devtool: isProduction ? 'source-map' : 'inline-source-map',
+    
     devServer: {
       static: path.join(__dirname, 'public'),
       historyApiFallback: true,
