@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = (env) => {
-  const production = env === "production";
+  const isProduction = env === "production";
 
   return {
     entry: './src/app.js',
@@ -31,7 +31,7 @@ module.exports = (env) => {
       ],
     },
 
-    devtool: 'source-map',
+    devtool: isProduction ? 'source-map' : 'cheap-module-eval-source-map',
     // mode: 'development',
 
     devServer: {
