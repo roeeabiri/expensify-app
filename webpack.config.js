@@ -29,7 +29,7 @@ module.exports = {
   },
 
   devtool: 'source-map',
-  mode: 'development',
+  // mode: 'development',
 
   devServer: {
     static: path.join(__dirname, 'public'),
