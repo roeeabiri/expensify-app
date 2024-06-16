@@ -1,17 +1,18 @@
 const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = (env) => {
-  const isProduction = env === "production";
+  const isProduction = env === 'production';
+  const CSSExtract = new MiniCssExtractPlugin();
 
   return {
-    mode: isProduction ? 'production' : 'development', // Set the mode option
+    mode: isProduction ? 'production' : 'development',
 
     entry: './src/app.js',
 
     output: {
       path: path.join(__dirname, 'public'),
       filename: 'bundle.js',
-      sourceMapFilename: '[file].map', // Specify source map file name
     },
 
     module: {
@@ -29,10 +30,16 @@ module.exports = (env) => {
         },
         {
           test: /\.s?css$/,
-          use: ['style-loader', 'css-loader', 'sass-loader'],
+          use: [
+            isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
+            'css-loader',
+            'sass-loader',
+          ],
         },
       ],
     },
+
+    plugins: [CSSExtract],
 
     devtool: isProduction ? 'source-map' : 'eval-cheap-module-source-map',
 
@@ -40,5 +47,5 @@ module.exports = (env) => {
       static: path.join(__dirname, 'public'),
       historyApiFallback: true,
     },
-  }
+  };
 };
