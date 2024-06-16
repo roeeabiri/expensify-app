@@ -1,6 +1,5 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const { SourceMap } = require('module');
 
 module.exports = (env) => {
   const isProduction = env === 'production';
